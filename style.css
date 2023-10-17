@@ -1,0 +1,12 @@
+body {
+    flex-wrap: wrap;
+    text-align: center;
+    
+    background-color: rgb(9, 172, 9);
+}
+
+
+canvas{
+box-shadow: 20px 15px 50px ;
+
+}
