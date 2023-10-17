@@ -9,6 +9,10 @@ function drawGame(){
  console.log('draw game');
  //
  setTimeout(drawGame,1000/ speed);
+ 
+function clearScreen(){
+    
+}
 
 }
 
