@@ -6,12 +6,12 @@ const context = canvas.getContext('2d');
 let speed = 7;
 // game loop updates screen
 function drawGame(){
- console.log('draw game');
- //
+clearScreen();
  setTimeout(drawGame,1000/ speed);
  
 function clearScreen(){
-    
+context.fillStlyle = 'black';
+context.fillRect(0,0,canvas.clientWidth,canvas.height);
 }
 
 }
