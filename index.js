@@ -26,7 +26,7 @@ const snakeBodys = [];
 
 
 // adds two when snake 
-let bodyLength = 2;
+let tailLength = 2;
 
 let foodX = 5;
 let foodY = 5;
@@ -58,8 +58,7 @@ context.fillRect(0,0,canvas.width,canvas.height);
 }
 // adds snake color and shape
 function drawSnake(){
-    context.fillStyle = 'red' 
-    context.fillRect(headX * tileCount, headY * tileCount, tileSize, tileSize );
+   
     
     //color of snake body
     context.fillStyle = 'blue';
@@ -67,13 +66,18 @@ function drawSnake(){
  // snake body will increase when food is eaten
 for(let i =0; i < snakeBodys.length; i++){
         let body = snakeBodys [i];
-        context.fillRect(body.X* tileCount, body.Y* tileCount, tileSize, tileSize)
+        context.fillRect(body.x * tileCount, body.y * tileCount, tileSize, tileSize)
     }
-     
-     snakeBodys.push(new SnakeBody(headX,headY));
-     if(snakeBodys.length > bodyLength){
+     // puts body where snake head was 
+    snakeBodys.push(new SnakeBody(headX,headY));
+      if (snakeBodys.length > tailLength){
+     //adds snake body one after another 
         snakeBodys.shift();
-     }
+
+    }
+    //color of snake head
+    context.fillStyle = 'red'; 
+    context.fillRect(headX * tileCount, headY * tileCount, tileSize, tileSize );
 
 
 }
@@ -86,7 +90,7 @@ function checkFoodCollision(){
    foodY = Math.floor(Math.random() * tileCount);
 
    //adds length to body by one 
-   bodyLength++;
+   tailLength++;
   }
 }
 
