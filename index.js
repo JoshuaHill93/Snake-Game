@@ -25,9 +25,10 @@ const snakeBodys = [];
 
 
 
-// adds two when snake 
+// adds two squares to the body when game starts
 let tailLength = 2;
 
+// postion of food at the start of the game
 let foodX = 5;
 let foodY = 5;
 
@@ -36,21 +37,78 @@ let foodY = 5;
 let xVelocity=0;
 let yVelocity=0;
 
+let score = 0;
 
 
 // game loop 
 function drawGame(){
-clearScreen();
-changeSnakePosition();
+    changeSnakePosition();
+    let result = isGameOver();
+    if(result){
+        return;
+    }
+
+    clearScreen();
+
 
 
 
 checkFoodCollision();
 drawSnake();
+
+drawScore();
+
 drawFood();
 setTimeout(drawGame,1000/ speed);
 }
 
+//if the snake hits any og the walls the text will display game over
+function isGameOver(){
+let gameOver = false;
+
+if(yVelocity ===0 && xVelocity ===0)
+return false;
+
+if(headX < 0){
+    gameOver = true;
+}
+
+ else if(headX === tileCount){
+  gameOver = true
+}
+
+ else if(headY < 0){
+    gameOver = true
+}
+
+ else if(headY === tileCount){
+    gameOver = true
+  }
+  
+
+for(let i = 0; i < snakeBodys.length; i++ ){
+    let body = snakeBodys[i];
+    if(body.x === headX && body.y === headY){
+    gameOver = true;
+    break;
+    }
+}
+
+
+if(gameOver){
+    context.fillStyle = "green"
+    context.font = "50px"
+    context.fillText("Game Over!", canvas.width / 6.5, canvas.height / 2)
+}
+return gameOver;
+
+}
+
+function drawScore(){
+    context.fillStyle = "white";
+    context.font = "12px verdana "
+    context.fillText("Score" +  score, canvas.width -200, 10);
+}
 
 function clearScreen(){
 context.fillStyle = 'black';
@@ -58,7 +116,7 @@ context.fillRect(0,0,canvas.width,canvas.height);
 }
 // adds snake color and shape
 function drawSnake(){
-   
+
     
     //color of snake body
     context.fillStyle = 'blue';
@@ -70,7 +128,7 @@ for(let i =0; i < snakeBodys.length; i++){
     }
      // puts body where snake head was 
     snakeBodys.push(new SnakeBody(headX,headY));
-      if (snakeBodys.length > tailLength){
+    while (snakeBodys.length > tailLength){
      //adds snake body one after another 
         snakeBodys.shift();
 
@@ -85,13 +143,15 @@ for(let i =0; i < snakeBodys.length; i++){
 
 //when snake head goes over food, the  food goes to a random place on the boared
 function checkFoodCollision(){
-  if (foodX === headX && foodY == headY){
+if (foodX === headX && foodY == headY){
    foodX = Math.floor(Math.random() * tileCount);
    foodY = Math.floor(Math.random() * tileCount);
 
-   //adds length to body by one 
-   tailLength++;
-  }
+   //adds length to body 
+tailLength++;
+   //adds points to score board once food is eaten
+score++;
+    }
 }
 
 
