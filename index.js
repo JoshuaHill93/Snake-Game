@@ -39,6 +39,9 @@ let yVelocity=0;
 
 let score = 0;
 
+// snake hiss sound
+ const hissSound = new Audio ("JYFHR5V-snake-hiss.mp3");
+
 
 // game loop 
 function drawGame(){
@@ -85,7 +88,7 @@ if(headX < 0){
     gameOver = true
   }
   
-
+// when snake hits it own body game over! will appear 
 for(let i = 0; i < snakeBodys.length; i++ ){
     let body = snakeBodys[i];
     if(body.x === headX && body.y === headY){
@@ -151,6 +154,7 @@ if (foodX === headX && foodY == headY){
 tailLength++;
    //adds points to score board once food is eaten
 score++;
+hissSound.play();
     }
 }
 
