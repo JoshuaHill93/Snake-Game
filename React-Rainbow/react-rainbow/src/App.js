@@ -1,20 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
-//import ColorBlock from './ColorBlock'
-import React, { useState } from 'react'
-//import ColorBlock from './ColorBlock'
+import React, { useState } from "react";
+import { colorblock } from "./components/Colorblock";
+import ColorForm from "./components/ColorForm";
 
-function App(){
-    let [colors, setColors] = useState([
-        'violet', 'blue',
-        'lightblue', 'green',
-        'greenyellow', 'yellow',
-        'orange', 'red',
-        
-    ])
+const DEFAULT_COLORS = ['red','yellow','blue','green','violet','teal','greenyellow','lightblue','grey',]
 
-   
+function App() {
+    const [colors,setColors] = useState(DEFAULT_COLORS);
+
+    const handleAddColor = (newColor) => {
+        setColors([...colors,newColor]);
+    }
 }
+    return (<div className = 'App'>
+{
+     
+colors.map((c,i)=> {
+    return <colorblock key={i} color={c}/>
+})
+}
+<ColorForm addColor ={handleAddColor} />
+</div>);
+
 
 
 
