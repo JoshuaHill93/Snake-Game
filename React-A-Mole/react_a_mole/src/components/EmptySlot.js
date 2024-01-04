@@ -1,21 +1,19 @@
 import { useEffect } from "react"
-import moleImg from "../images/molehill.png"
+import MoleHill from '../molehill.png'
 
+const EmptySlot = (props) => {
 
-function EmptySlot(props) {
     useEffect(() => {
-        let randSeconds = Math.ceil(Math.random() * 5000) //from instructions
-        let timer = setTimeout(() => { //from instructions
-            props.setDisplayMole(true)
+        let randSeconds = Math.ceil(Math.random() * 5000)
+        let timer = setTimeout(() => {
+            props.toggle(true)
         }, randSeconds)
         return () => clearTimeout(timer)
     })
-    return (//from instructions
-        <div className="emptySlot">
-            <img 
-            src={moleImg} 
-            alt="mole" 
-            onClick={props.handleClick}/>
+
+    return (
+        <div>
+            <img style={{'width': '30vw'}} src={MoleHill} />
         </div>
     )
 }
